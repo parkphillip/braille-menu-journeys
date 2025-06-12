@@ -10,9 +10,9 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ onSectionChange }) =>
 
   const sections = [
     { id: 'what-braille-changes', title: 'Impact' },
-    { id: 'experience-menu', title: 'Craft' },
-    { id: 'see-movement', title: 'Movement' },
-    { id: 'order-space', title: 'Start' },
+    { id: 'experience-menu', title: 'Lab' },
+    { id: 'see-movement', title: 'Network' },
+    { id: 'order-space', title: 'Deploy' },
   ];
 
   useEffect(() => {
@@ -45,25 +45,30 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ onSectionChange }) =>
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 craft-nav">
+    <nav className="fixed top-0 left-0 right-0 z-50 lab-nav">
       <div className="max-w-7xl mx-auto px-8">
-        <div className="flex items-center justify-between h-[60px]">
-          <div className="text-2xl font-bold font-serif text-stone-800">Accessly</div>
+        <div className="flex items-center justify-between h-[64px]">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
+              <div className="w-4 h-4 bg-white rounded-sm"></div>
+            </div>
+            <div className="text-xl font-semibold text-slate-900">Accessly</div>
+          </div>
           
           <div className="hidden lg:flex items-center space-x-8">
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`nav-link-craft ${activeSection === section.id ? 'active' : ''}`}
+                className={`nav-link-lab ${activeSection === section.id ? 'active' : ''}`}
               >
                 {section.title}
               </button>
             ))}
           </div>
 
-          <button className="craft-button">
-            Join Free
+          <button className="lab-button">
+            Get Started
           </button>
         </div>
       </div>

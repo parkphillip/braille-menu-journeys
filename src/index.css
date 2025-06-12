@@ -5,79 +5,85 @@
 
 @layer base {
   :root {
-    --background: 245 243 240;
-    --foreground: 35 35 40;
+    --background: 248 250 252;
+    --foreground: 15 23 42;
 
-    --card: 250 248 245;
-    --card-foreground: 35 35 40;
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
 
-    --popover: 250 248 245;
-    --popover-foreground: 35 35 40;
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 42;
 
-    --primary: 65 60 55;
-    --primary-foreground: 250 248 245;
+    --primary: 15 23 42;
+    --primary-foreground: 255 255 255;
 
-    --secondary: 235 230 225;
-    --secondary-foreground: 35 35 40;
+    --secondary: 241 245 249;
+    --secondary-foreground: 51 65 85;
 
-    --muted: 240 235 230;
-    --muted-foreground: 120 115 110;
+    --muted: 248 250 252;
+    --muted-foreground: 100 116 139;
 
-    --accent: 225 215 205;
-    --accent-foreground: 35 35 40;
+    --accent: 236 242 251;
+    --accent-foreground: 30 41 59;
 
-    --destructive: 200 60 50;
-    --destructive-foreground: 250 248 245;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
 
-    --border: 215 210 205;
-    --input: 215 210 205;
-    --ring: 65 60 55;
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 15 23 42;
 
     --radius: 0.5rem;
 
-    /* Indie Craft Color Palette */
-    --stone-50: 252 251 249;
-    --stone-100: 247 245 242;
-    --stone-200: 235 230 223;
-    --stone-300: 215 207 196;
-    --stone-400: 180 168 154;
-    --stone-500: 145 130 115;
-    --stone-600: 115 100 88;
-    --stone-700: 85 72 62;
-    --stone-800: 55 45 38;
-    --stone-900: 35 28 23;
+    /* AI Lab Color Palette */
+    --slate-50: 248 250 252;
+    --slate-100: 241 245 249;
+    --slate-200: 226 232 240;
+    --slate-300: 203 213 225;
+    --slate-400: 148 163 184;
+    --slate-500: 100 116 139;
+    --slate-600: 71 85 105;
+    --slate-700: 51 65 85;
+    --slate-800: 30 41 59;
+    --slate-900: 15 23 42;
 
-    --earth-50: 251 249 246;
-    --earth-100: 245 240 232;
-    --earth-200: 230 220 205;
-    --earth-300: 210 195 172;
-    --earth-400: 175 155 128;
-    --earth-500: 140 120 95;
-    --earth-600: 110 92 72;
-    --earth-700: 82 68 52;
-    --earth-800: 55 43 32;
-    --earth-900: 35 26 18;
+    --gray-50: 249 250 251;
+    --gray-100: 243 244 246;
+    --gray-200: 229 231 235;
+    --gray-300: 209 213 219;
+    --gray-400: 156 163 175;
+    --gray-500: 107 114 128;
+    --gray-600: 75 85 99;
+    --gray-700: 55 65 81;
+    --gray-800: 31 41 55;
+    --gray-900: 17 24 39;
 
-    --craft-orange: 210 120 65;
-    --craft-rust: 165 85 55;
-    --craft-olive: 120 135 85;
-    --craft-sage: 155 165 140;
+    --blue-50: 239 246 255;
+    --blue-100: 219 234 254;
+    --blue-200: 191 219 254;
+    --blue-300: 147 197 253;
+    --blue-400: 96 165 250;
+    --blue-500: 59 130 246;
+    --blue-600: 37 99 235;
+    --blue-700: 29 78 216;
+    --blue-800: 30 64 175;
+    --blue-900: 30 58 138;
 
-    --sidebar-background: 250 248 245;
-    --sidebar-foreground: 35 35 40;
-    --sidebar-primary: 65 60 55;
-    --sidebar-primary-foreground: 250 248 245;
-    --sidebar-accent: 225 215 205;
-    --sidebar-accent-foreground: 35 35 40;
-    --sidebar-border: 215 210 205;
-    --sidebar-ring: 65 60 55;
+    --sidebar-background: 255 255 255;
+    --sidebar-foreground: 15 23 42;
+    --sidebar-primary: 15 23 42;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 241 245 249;
+    --sidebar-accent-foreground: 51 65 85;
+    --sidebar-border: 226 232 240;
+    --sidebar-ring: 15 23 42;
   }
 
   .dark {
-    --background: 35 28 23;
-    --foreground: 247 245 242;
-    --card: 45 38 32;
-    --card-foreground: 247 245 242;
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
   }
 }
 
@@ -88,11 +94,7 @@
 
   body {
     @apply text-foreground font-sans;
-    background: linear-gradient(135deg, 
-      rgb(var(--stone-50)) 0%, 
-      rgb(var(--earth-100)) 50%,
-      rgb(var(--stone-100)) 100%
-    );
+    background: rgb(var(--slate-50));
     font-feature-settings: "rlig" 1, "calt" 1;
     line-height: 1.6;
   }
@@ -102,134 +104,122 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
-    color: rgb(var(--stone-800));
+    @apply font-sans font-semibold;
+    color: rgb(var(--slate-900));
   }
 }
 
 @layer components {
-  .craft-section {
-    @apply relative py-20 px-6;
-    background: linear-gradient(
-      135deg,
-      rgba(var(--stone-100), 0.8) 0%,
-      rgba(var(--earth-50), 0.9) 30%,
-      rgba(var(--stone-50), 0.95) 70%,
-      rgba(var(--earth-100), 0.8) 100%
-    );
+  .lab-section {
+    @apply relative py-24 px-6;
+    background: rgb(var(--slate-50));
   }
 
-  .craft-section::before {
-    content: '';
-    @apply absolute inset-0 opacity-30;
-    background: 
-      radial-gradient(circle at 25% 25%, rgba(var(--craft-sage), 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(var(--craft-olive), 0.1) 0%, transparent 50%);
+  .lab-section.alt {
+    background: rgb(var(--gray-50));
   }
 
-  .craft-content {
+  .lab-content {
     @apply relative z-10;
   }
 
-  .craft-card {
+  .lab-card {
     @apply relative overflow-hidden;
-    background: rgba(var(--stone-50), 0.9);
-    border: 1px solid rgba(var(--stone-300), 0.6);
-    border-radius: 0.75rem;
+    background: rgb(var(--card));
+    border: 1px solid rgb(var(--border));
+    border-radius: 12px;
     box-shadow: 
-      0 2px 8px rgba(var(--stone-800), 0.08),
-      0 1px 3px rgba(var(--earth-600), 0.12);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      0 1px 3px rgba(var(--slate-900), 0.03),
+      0 4px 12px rgba(var(--slate-900), 0.04);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .craft-card:hover {
-    transform: translateY(-3px);
+  .lab-card:hover {
+    transform: translateY(-2px);
     box-shadow: 
-      0 8px 25px rgba(var(--stone-800), 0.12),
-      0 3px 10px rgba(var(--earth-600), 0.15);
+      0 4px 12px rgba(var(--slate-900), 0.06),
+      0 8px 24px rgba(var(--slate-900), 0.08);
   }
 
-  .craft-nav {
+  .lab-nav {
     @apply relative backdrop-blur-xl;
-    background: rgba(var(--stone-50), 0.95);
-    border-bottom: 1px solid rgba(var(--stone-300), 0.5);
-    height: 60px;
+    background: rgba(var(--card), 0.95);
+    border-bottom: 1px solid rgb(var(--border));
+    height: 64px;
   }
 
-  .nav-link-craft {
+  .nav-link-lab {
     @apply relative px-4 py-2 text-sm font-medium transition-all duration-300;
-    color: rgb(var(--stone-700));
+    color: rgb(var(--slate-700));
   }
 
-  .nav-link-craft:hover {
-    color: rgb(var(--stone-800));
+  .nav-link-lab:hover {
+    color: rgb(var(--slate-900));
   }
 
-  .nav-link-craft.active {
-    color: rgb(var(--craft-rust));
+  .nav-link-lab.active {
+    color: rgb(var(--slate-900));
   }
 
-  .nav-link-craft::after {
+  .nav-link-lab::after {
     content: '';
     @apply absolute bottom-0 left-1/2 w-0 h-0.5;
-    background: rgb(var(--craft-rust));
+    background: rgb(var(--slate-900));
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateX(-50%);
   }
 
-  .nav-link-craft.active::after {
+  .nav-link-lab.active::after {
     @apply w-full;
   }
 
-  .craft-button {
+  .lab-button {
     @apply relative overflow-hidden px-6 py-3 font-medium text-sm;
-    background: linear-gradient(135deg, 
-      rgb(var(--craft-rust)) 0%, 
-      rgb(var(--craft-orange)) 100%
-    );
-    color: rgb(var(--stone-50));
-    border-radius: 0.5rem;
-    box-shadow: 0 3px 12px rgba(var(--craft-rust), 0.3);
+    background: rgb(var(--slate-900));
+    color: rgb(var(--slate-50));
+    border-radius: 8px;
     transition: all 0.3s ease;
   }
 
-  .craft-button:hover {
+  .lab-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 5px 18px rgba(var(--craft-rust), 0.4);
+    background: rgb(var(--slate-800));
   }
 
-  .braille-workshop {
-    @apply relative p-8 rounded-lg overflow-hidden;
-    background: linear-gradient(145deg, 
-      rgba(var(--earth-100), 0.8) 0%, 
-      rgba(var(--stone-100), 0.9) 100%
-    );
-    border: 2px solid rgba(var(--stone-300), 0.4);
+  .lab-button.secondary {
+    background: rgb(var(--slate-100));
+    color: rgb(var(--slate-900));
+    border: 1px solid rgb(var(--border));
   }
 
-  .braille-dot-craft {
-    @apply absolute w-3 h-3 rounded-full transition-all duration-300;
-    background: rgb(var(--stone-400));
-    box-shadow: 
-      inset 0 1px 2px rgba(255,255,255,0.3),
-      0 1px 3px rgba(var(--stone-600), 0.2);
+  .lab-button.secondary:hover {
+    background: rgb(var(--slate-200));
   }
 
-  .braille-dot-craft.active {
-    background: rgb(var(--craft-rust));
-    box-shadow: 
-      inset 0 1px 2px rgba(255,255,255,0.4),
-      0 2px 6px rgba(var(--craft-rust), 0.4);
+  .braille-lab {
+    @apply relative p-8 rounded-xl overflow-hidden;
+    background: rgb(var(--card));
+    border: 1px solid rgb(var(--border));
+  }
+
+  .braille-dot-lab {
+    @apply absolute w-4 h-4 rounded-full transition-all duration-300;
+    background: rgb(var(--slate-300));
+    box-shadow: 0 1px 2px rgba(var(--slate-900), 0.1);
+  }
+
+  .braille-dot-lab.active {
+    background: rgb(var(--slate-900));
+    box-shadow: 0 2px 4px rgba(var(--slate-900), 0.2);
     transform: scale(1.1);
   }
 
-  .typewriter-container {
+  .typewriter-lab {
     @apply relative overflow-hidden font-mono text-lg;
     min-height: 120px;
-    background: rgba(var(--stone-800), 0.95);
-    color: rgb(var(--stone-100));
-    border-radius: 0.5rem;
+    background: rgb(var(--slate-900));
+    color: rgb(var(--slate-100));
+    border-radius: 8px;
     padding: 1.5rem;
   }
 
@@ -238,35 +228,39 @@
     height: 1.2em;
   }
 
-  .map-container {
-    @apply relative w-full h-96 rounded-lg overflow-hidden;
-    background: linear-gradient(135deg, 
-      rgba(var(--earth-200), 0.8) 0%, 
-      rgba(var(--stone-200), 0.9) 100%
-    );
+  .integration-grid {
+    @apply grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   }
 
-  .map-marker-craft {
-    @apply absolute w-4 h-4 rounded-full transform -translate-x-2 -translate-y-2 hover:scale-125 transition-all duration-300 z-10 cursor-pointer;
-    box-shadow: 0 2px 8px rgba(var(--stone-800), 0.2);
+  .integration-item {
+    @apply flex items-center justify-center p-4 rounded-lg transition-all duration-300;
+    background: rgb(var(--card));
+    border: 1px solid rgb(var(--border));
+    aspect-ratio: 1;
   }
 
-  .map-marker-craft.restaurant { background: rgb(var(--craft-olive)); }
-  .map-marker-craft.cafe { background: rgb(var(--craft-orange)); }
-  .map-marker-craft.hotel { background: rgb(var(--craft-sage)); }
-  .map-marker-craft.school { background: rgb(var(--craft-rust)); }
+  .integration-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--slate-900), 0.08);
+  }
 
-  .order-step {
+  .order-step-lab {
     @apply relative p-6 rounded-lg;
-    background: rgba(var(--stone-50), 0.8);
-    border: 1px solid rgba(var(--stone-300), 0.5);
+    background: rgb(var(--card));
+    border: 1px solid rgb(var(--border));
     transition: all 0.3s ease;
   }
 
-  .order-step.active {
-    background: rgba(var(--earth-50), 0.9);
-    border-color: rgba(var(--craft-rust), 0.6);
-    box-shadow: 0 4px 12px rgba(var(--craft-rust), 0.15);
+  .order-step-lab.active {
+    background: rgb(var(--blue-50));
+    border-color: rgb(var(--blue-200));
+  }
+
+  .feature-highlight {
+    @apply relative p-8 rounded-xl;
+    background: linear-gradient(135deg, rgb(var(--blue-50)) 0%, rgb(var(--slate-50)) 100%);
+    border: 1px solid rgb(var(--blue-200));
   }
 }
 
@@ -275,8 +269,8 @@
     text-wrap: balance;
   }
 
-  .craft-gradient-text {
-    background: linear-gradient(135deg, rgb(var(--craft-rust)), rgb(var(--craft-orange)));
+  .lab-gradient-text {
+    background: linear-gradient(135deg, rgb(var(--slate-900)), rgb(var(--slate-600)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -308,5 +302,14 @@
     to {
       opacity: 1;
     }
+  }
+
+  @keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-2px); }
+  }
+
+  .animate-gentle-bounce {
+    animation: gentle-bounce 2s ease-in-out infinite;
   }
 }
