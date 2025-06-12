@@ -74,6 +74,18 @@ export default {
 					DEFAULT: 'hsl(var(--tactile))',
 					raised: 'hsl(var(--tactile-raised))',
 					shadow: 'hsl(var(--tactile-shadow))'
+				},
+				warm: {
+					50: '#fefaf8',
+					100: '#fdf4f0',
+					200: '#fae6de',
+					300: '#f6d5c7',
+					400: '#f0bfa0',
+					500: '#e8a373',
+					600: '#db8a50',
+					700: '#c87540',
+					800: '#a86039',
+					900: '#8a4f32'
 				}
 			},
 			borderRadius: {
@@ -82,7 +94,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				'display': ['Inter', 'system-ui', 'sans-serif'],
+				'serif': ['Crimson Text', 'Georgia', 'serif'],
+				'sans': ['Source Sans Pro', 'system-ui', 'sans-serif'],
 				'braille': ['Monaco', 'Courier New', 'monospace'],
 			},
 			spacing: {

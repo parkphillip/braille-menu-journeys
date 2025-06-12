@@ -3,107 +3,96 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @layer base {
   :root {
-    --background: 252 252 252;
-    --foreground: 15 23 42;
+    --background: 254 252 248;
+    --foreground: 41 37 36;
 
     --card: 255 255 255;
-    --card-foreground: 15 23 42;
+    --card-foreground: 41 37 36;
 
     --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
+    --popover-foreground: 41 37 36;
 
-    --primary: 30 41 59;
-    --primary-foreground: 248 250 252;
+    --primary: 138 79 50;
+    --primary-foreground: 254 252 248;
 
-    --secondary: 241 245 249;
-    --secondary-foreground: 30 41 59;
+    --secondary: 250 230 222;
+    --secondary-foreground: 138 79 50;
 
-    --muted: 248 250 252;
-    --muted-foreground: 100 116 139;
+    --muted: 250 230 222;
+    --muted-foreground: 120 113 108;
 
-    --accent: 239 246 255;
-    --accent-foreground: 30 41 59;
+    --accent: 246 213 199;
+    --accent-foreground: 138 79 50;
 
     --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
+    --destructive-foreground: 254 252 248;
 
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 59 130 246;
+    --border: 231 229 228;
+    --input: 231 229 228;
+    --ring: 168 96 57;
 
     --radius: 0.75rem;
 
-    --braille: 71 85 105;
-    --braille-foreground: 248 250 252;
+    --braille: 87 83 81;
+    --braille-foreground: 254 252 248;
     --braille-paper: 254 252 248;
-    --braille-aluminum: 241 245 249;
-    --braille-plastic: 249 250 251;
+    --braille-aluminum: 245 245 244;
+    --braille-plastic: 250 250 249;
 
-    --tactile: 148 163 184;
-    --tactile-raised: 203 213 225;
-    --tactile-shadow: 71 85 105;
+    --tactile: 168 162 158;
+    --tactile-raised: 214 211 209;
+    --tactile-shadow: 87 83 81;
 
     --sidebar-background: 255 255 255;
-    --sidebar-foreground: 71 85 105;
-    --sidebar-primary: 30 41 59;
-    --sidebar-primary-foreground: 248 250 252;
-    --sidebar-accent: 248 250 252;
-    --sidebar-accent-foreground: 30 41 59;
-    --sidebar-border: 226 232 240;
-    --sidebar-ring: 59 130 246;
+    --sidebar-foreground: 87 83 81;
+    --sidebar-primary: 138 79 50;
+    --sidebar-primary-foreground: 254 252 248;
+    --sidebar-accent: 250 230 222;
+    --sidebar-accent-foreground: 138 79 50;
+    --sidebar-border: 231 229 228;
+    --sidebar-ring: 168 96 57;
   }
 
   .dark {
-    --background: 2 6 23;
-    --foreground: 248 250 252;
+    --background: 28 25 23;
+    --foreground: 250 230 222;
 
-    --card: 15 23 42;
-    --card-foreground: 248 250 252;
+    --card: 41 37 36;
+    --card-foreground: 250 230 222;
 
-    --popover: 15 23 42;
-    --popover-foreground: 248 250 252;
+    --popover: 41 37 36;
+    --popover-foreground: 250 230 222;
 
-    --primary: 248 250 252;
-    --primary-foreground: 15 23 42;
+    --primary: 246 213 199;
+    --primary-foreground: 41 37 36;
 
-    --secondary: 30 41 59;
-    --secondary-foreground: 248 250 252;
+    --secondary: 68 64 60;
+    --secondary-foreground: 250 230 222;
 
-    --muted: 30 41 59;
-    --muted-foreground: 148 163 184;
+    --muted: 68 64 60;
+    --muted-foreground: 168 162 158;
 
-    --accent: 30 41 59;
-    --accent-foreground: 248 250 252;
+    --accent: 87 83 81;
+    --accent-foreground: 250 230 222;
 
     --destructive: 220 38 38;
-    --destructive-foreground: 248 250 252;
+    --destructive-foreground: 250 230 222;
 
-    --border: 51 65 85;
-    --input: 51 65 85;
-    --ring: 147 197 253;
+    --border: 87 83 81;
+    --input: 87 83 81;
+    --ring: 214 158 134;
 
-    --braille: 203 213 225;
-    --braille-foreground: 15 23 42;
-    --braille-paper: 30 27 24;
-    --braille-aluminum: 51 65 85;
-    --braille-plastic: 30 41 59;
+    --braille: 214 211 209;
+    --braille-foreground: 41 37 36;
+    --braille-paper: 68 64 60;
+    --braille-aluminum: 87 83 81;
+    --braille-plastic: 68 64 60;
 
-    --tactile: 100 116 139;
-    --tactile-raised: 148 163 184;
-    --tactile-shadow: 15 23 42;
-
-    --sidebar-background: 15 23 42;
-    --sidebar-foreground: 203 213 225;
-    --sidebar-primary: 248 250 252;
-    --sidebar-primary-foreground: 15 23 42;
-    --sidebar-accent: 30 41 59;
-    --sidebar-accent-foreground: 248 250 252;
-    --sidebar-border: 51 65 85;
-    --sidebar-ring: 147 197 253;
+    --tactile: 120 113 108;
+    --tactile-raised: 168 162 158;
+    --tactile-shadow: 28 25 23;
   }
 }
 
@@ -113,12 +102,17 @@
   }
 
   body {
-    @apply bg-background text-foreground font-display;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.7;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
   }
 }
 

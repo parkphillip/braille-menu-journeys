@@ -46,27 +46,27 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ onSectionChange }) =>
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          <div className="text-2xl font-bold">Accessly</div>
+          <div className="text-3xl font-bold font-serif text-primary">Accessly</div>
           
           <div className="hidden lg:flex items-center space-x-8">
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`nav-story ${activeSection === section.id ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                className={`nav-story ${activeSection === section.id ? 'text-primary' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
               >
                 <div className="text-left">
-                  <div className="text-sm font-medium">{section.title}</div>
-                  <div className="text-xs">{section.subtitle}</div>
+                  <div className="text-base font-semibold">{section.title}</div>
+                  <div className="text-sm opacity-75">{section.subtitle}</div>
                 </div>
               </button>
             ))}
           </div>
 
-          <Button className="tactile-button">
+          <Button className="tactile-button bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg shadow-md">
             Join the Movement
           </Button>
         </div>
