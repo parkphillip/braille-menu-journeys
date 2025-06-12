@@ -1,12 +1,118 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import StoryNavigation from '@/components/StoryNavigation';
+import HeroSection from '@/components/HeroSection';
+import WhatBrailleChanges from '@/components/WhatBrailleChanges';
+import BrailleExplorer from '@/components/BrailleExplorer';
+import ImpactStories from '@/components/ImpactStories';
+import OrderFlow from '@/components/OrderFlow';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <StoryNavigation />
+      
+      <main className="pt-20">
+        <HeroSection />
+        <WhatBrailleChanges />
+        <BrailleExplorer />
+        <ImpactStories />
+        <OrderFlow />
+        
+        {/* Join the Movement Section */}
+        <section className="py-24 px-6 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">Join the Movement</h2>
+            <p className="text-xl mb-12 opacity-90">
+              Every braille menu creates ripples of independence. 
+              Be part of a community that believes dining should be accessible to everyone.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-3">Restaurant Owners</h3>
+                <p className="opacity-90 mb-4">Transform your space into a beacon of inclusivity</p>
+                <button className="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                  Get Your Menus
+                </button>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-3">Advocates</h3>
+                <p className="opacity-90 mb-4">Nominate restaurants in your community</p>
+                <button className="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                  Nominate a Place
+                </button>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-3">Partners</h3>
+                <p className="opacity-90 mb-4">Help us scale accessibility nationwide</p>
+                <button className="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                  Partner With Us
+                </button>
+              </div>
+            </div>
+            
+            <p className="text-lg opacity-90">
+              Together, we're not just making menus accessible—we're changing lives, one meal at a time.
+            </p>
+          </div>
+        </section>
+      </main>
+      
+      {/* Footer */}
+      <footer className="bg-slate-900 text-white py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">Accessly</h3>
+              <p className="text-gray-400">
+                Making dining accessible, one braille menu at a time.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Braille Menu Design</li>
+                <li>Material Selection</li>
+                <li>Multi-language Support</li>
+                <li>Ongoing Updates</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Resources</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Accessibility Guidelines</li>
+                <li>Success Stories</li>
+                <li>Design Best Practices</li>
+                <li>Support Center</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Connect</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Contact Us</li>
+                <li>Partner Network</li>
+                <li>Community Forum</li>
+                <li>Newsletter</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400">© 2024 Accessly. Making dining inclusive for everyone.</p>
+            <div className="flex gap-6 mt-4 md:mt-0 text-gray-400">
+              <span>Privacy Policy</span>
+              <span>Terms of Service</span>
+              <span>Accessibility Statement</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
