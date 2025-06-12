@@ -5,81 +5,79 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
-    --foreground: 30 30 35;
+    --background: 245 243 240;
+    --foreground: 35 35 40;
 
-    --card: 255 255 255;
-    --card-foreground: 30 30 35;
+    --card: 250 248 245;
+    --card-foreground: 35 35 40;
 
-    --popover: 255 255 255;
-    --popover-foreground: 30 30 35;
+    --popover: 250 248 245;
+    --popover-foreground: 35 35 40;
 
-    --primary: 45 45 55;
-    --primary-foreground: 255 255 255;
+    --primary: 65 60 55;
+    --primary-foreground: 250 248 245;
 
-    --secondary: 248 249 250;
-    --secondary-foreground: 30 30 35;
+    --secondary: 235 230 225;
+    --secondary-foreground: 35 35 40;
 
-    --muted: 248 249 250;
-    --muted-foreground: 100 100 110;
+    --muted: 240 235 230;
+    --muted-foreground: 120 115 110;
 
-    --accent: 245 246 247;
-    --accent-foreground: 30 30 35;
+    --accent: 225 215 205;
+    --accent-foreground: 35 35 40;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
+    --destructive: 200 60 50;
+    --destructive-foreground: 250 248 245;
 
-    --border: 230 232 235;
-    --input: 230 232 235;
-    --ring: 45 45 55;
+    --border: 215 210 205;
+    --input: 215 210 205;
+    --ring: 65 60 55;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Human-Fintech Color Palette */
-    --neutral-50: 250 250 251;
-    --neutral-100: 245 246 247;
-    --neutral-200: 231 233 237;
-    --neutral-300: 209 213 218;
-    --neutral-400: 156 163 172;
-    --neutral-500: 107 114 126;
-    --neutral-600: 75 82 95;
-    --neutral-700: 55 61 72;
-    --neutral-800: 30 30 35;
-    --neutral-900: 20 20 25;
+    /* Indie Craft Color Palette */
+    --stone-50: 252 251 249;
+    --stone-100: 247 245 242;
+    --stone-200: 235 230 223;
+    --stone-300: 215 207 196;
+    --stone-400: 180 168 154;
+    --stone-500: 145 130 115;
+    --stone-600: 115 100 88;
+    --stone-700: 85 72 62;
+    --stone-800: 55 45 38;
+    --stone-900: 35 28 23;
 
-    --warm-50: 252 251 249;
-    --warm-100: 249 247 243;
-    --warm-200: 241 237 229;
-    --warm-300: 228 220 206;
-    --warm-400: 196 181 159;
-    --warm-500: 168 139 116;
-    --warm-600: 139 108 88;
-    --warm-700: 101 78 64;
-    --warm-800: 67 52 42;
-    --warm-900: 45 35 28;
+    --earth-50: 251 249 246;
+    --earth-100: 245 240 232;
+    --earth-200: 230 220 205;
+    --earth-300: 210 195 172;
+    --earth-400: 175 155 128;
+    --earth-500: 140 120 95;
+    --earth-600: 110 92 72;
+    --earth-700: 82 68 52;
+    --earth-800: 55 43 32;
+    --earth-900: 35 26 18;
 
-    --accent-purple: 99 102 241;
-    --accent-blue: 59 130 246;
-    --accent-emerald: 16 185 129;
-    --accent-amber: 245 158 11;
+    --craft-orange: 210 120 65;
+    --craft-rust: 165 85 55;
+    --craft-olive: 120 135 85;
+    --craft-sage: 155 165 140;
 
-    --sidebar-background: 255 255 255;
-    --sidebar-foreground: 30 30 35;
-    --sidebar-primary: 45 45 55;
-    --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 245 246 247;
-    --sidebar-accent-foreground: 30 30 35;
-    --sidebar-border: 230 232 235;
-    --sidebar-ring: 45 45 55;
+    --sidebar-background: 250 248 245;
+    --sidebar-foreground: 35 35 40;
+    --sidebar-primary: 65 60 55;
+    --sidebar-primary-foreground: 250 248 245;
+    --sidebar-accent: 225 215 205;
+    --sidebar-accent-foreground: 35 35 40;
+    --sidebar-border: 215 210 205;
+    --sidebar-ring: 65 60 55;
   }
 
   .dark {
-    --background: 15 15 18;
-    --foreground: 245 246 247;
-    --card: 20 20 25;
-    --card-foreground: 245 246 247;
-    --neutral-900: 245 246 247;
-    --neutral-800: 231 233 237;
+    --background: 35 28 23;
+    --foreground: 247 245 242;
+    --card: 45 38 32;
+    --card-foreground: 247 245 242;
   }
 }
 
@@ -90,7 +88,11 @@
 
   body {
     @apply text-foreground font-sans;
-    background: linear-gradient(135deg, rgb(var(--neutral-50)) 0%, rgb(var(--warm-50)) 100%);
+    background: linear-gradient(135deg, 
+      rgb(var(--stone-50)) 0%, 
+      rgb(var(--earth-100)) 50%,
+      rgb(var(--stone-100)) 100%
+    );
     font-feature-settings: "rlig" 1, "calt" 1;
     line-height: 1.6;
   }
@@ -101,167 +103,171 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
-    color: rgb(var(--neutral-800));
+    color: rgb(var(--stone-800));
   }
 }
 
 @layer components {
-  .fintech-section {
-    @apply relative py-16 px-6;
+  .craft-section {
+    @apply relative py-20 px-6;
     background: linear-gradient(
       135deg,
-      rgba(var(--neutral-50), 0.8) 0%,
-      rgba(var(--warm-50), 0.9) 50%,
-      rgba(var(--neutral-100), 0.6) 100%
+      rgba(var(--stone-100), 0.8) 0%,
+      rgba(var(--earth-50), 0.9) 30%,
+      rgba(var(--stone-50), 0.95) 70%,
+      rgba(var(--earth-100), 0.8) 100%
     );
   }
 
-  .fintech-section::before {
+  .craft-section::before {
     content: '';
-    @apply absolute inset-0 opacity-20;
+    @apply absolute inset-0 opacity-30;
     background: 
-      radial-gradient(circle at 20% 30%, rgba(var(--warm-300), 0.3) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(var(--accent-purple), 0.1) 0%, transparent 50%);
+      radial-gradient(circle at 25% 25%, rgba(var(--craft-sage), 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(var(--craft-olive), 0.1) 0%, transparent 50%);
   }
 
-  .premium-content {
+  .craft-content {
     @apply relative z-10;
   }
 
-  .fintech-card {
+  .craft-card {
     @apply relative overflow-hidden;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(var(--neutral-200), 0.5);
-    border-radius: 1rem;
+    background: rgba(var(--stone-50), 0.9);
+    border: 1px solid rgba(var(--stone-300), 0.6);
+    border-radius: 0.75rem;
     box-shadow: 
-      0 1px 3px rgba(var(--neutral-800), 0.05),
-      0 20px 25px -5px rgba(var(--neutral-800), 0.04),
-      0 10px 10px -5px rgba(var(--neutral-800), 0.02);
-    backdrop-filter: blur(16px);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      0 2px 8px rgba(var(--stone-800), 0.08),
+      0 1px 3px rgba(var(--earth-600), 0.12);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .fintech-card:hover {
-    transform: translateY(-2px);
+  .craft-card:hover {
+    transform: translateY(-3px);
     box-shadow: 
-      0 4px 6px rgba(var(--neutral-800), 0.07),
-      0 25px 50px -12px rgba(var(--neutral-800), 0.08);
+      0 8px 25px rgba(var(--stone-800), 0.12),
+      0 3px 10px rgba(var(--earth-600), 0.15);
   }
 
-  .premium-nav {
+  .craft-nav {
     @apply relative backdrop-blur-xl;
-    background: rgba(255, 255, 255, 0.95);
-    border-bottom: 1px solid rgba(var(--neutral-200), 0.6);
+    background: rgba(var(--stone-50), 0.95);
+    border-bottom: 1px solid rgba(var(--stone-300), 0.5);
     height: 60px;
   }
 
-  .nav-link-premium {
+  .nav-link-craft {
     @apply relative px-4 py-2 text-sm font-medium transition-all duration-300;
-    color: rgb(var(--neutral-700));
+    color: rgb(var(--stone-700));
   }
 
-  .nav-link-premium:hover {
-    color: rgb(var(--neutral-800));
+  .nav-link-craft:hover {
+    color: rgb(var(--stone-800));
   }
 
-  .nav-link-premium.active {
-    color: rgb(var(--accent-purple));
+  .nav-link-craft.active {
+    color: rgb(var(--craft-rust));
   }
 
-  .nav-link-premium::after {
+  .nav-link-craft::after {
     content: '';
     @apply absolute bottom-0 left-1/2 w-0 h-0.5;
-    background: rgb(var(--accent-purple));
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgb(var(--craft-rust));
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateX(-50%);
   }
 
-  .nav-link-premium.active::after {
+  .nav-link-craft.active::after {
     @apply w-full;
   }
 
-  .premium-button {
+  .craft-button {
     @apply relative overflow-hidden px-6 py-3 font-medium text-sm;
     background: linear-gradient(135deg, 
-      rgb(var(--accent-purple)) 0%, 
-      rgb(var(--accent-blue)) 100%
+      rgb(var(--craft-rust)) 0%, 
+      rgb(var(--craft-orange)) 100%
     );
-    color: white;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 14px 0 rgba(var(--accent-purple), 0.25);
+    color: rgb(var(--stone-50));
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 12px rgba(var(--craft-rust), 0.3);
     transition: all 0.3s ease;
   }
 
-  .premium-button:hover {
+  .craft-button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(var(--accent-purple), 0.35);
+    box-shadow: 0 5px 18px rgba(var(--craft-rust), 0.4);
   }
 
-  .data-visual {
-    @apply relative;
-    background: linear-gradient(135deg, 
-      rgba(var(--accent-emerald), 0.1) 0%, 
-      rgba(var(--accent-blue), 0.05) 100%
+  .braille-workshop {
+    @apply relative p-8 rounded-lg overflow-hidden;
+    background: linear-gradient(145deg, 
+      rgba(var(--earth-100), 0.8) 0%, 
+      rgba(var(--stone-100), 0.9) 100%
     );
-    border-radius: 1rem;
-    padding: 2rem;
+    border: 2px solid rgba(var(--stone-300), 0.4);
   }
 
-  .metric-card {
-    @apply text-center p-6;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(var(--neutral-200), 0.3);
-    border-radius: 1rem;
-    backdrop-filter: blur(10px);
+  .braille-dot-craft {
+    @apply absolute w-3 h-3 rounded-full transition-all duration-300;
+    background: rgb(var(--stone-400));
+    box-shadow: 
+      inset 0 1px 2px rgba(255,255,255,0.3),
+      0 1px 3px rgba(var(--stone-600), 0.2);
   }
 
-  .braille-cell-premium {
-    @apply relative inline-block w-6 h-8 mx-0.5 my-0.5;
-    transition: all 0.2s ease;
-  }
-
-  .braille-cell-premium:hover {
-    transform: translateY(-1px);
-  }
-
-  .braille-dot-premium {
-    @apply absolute w-1.5 h-1.5 rounded-full;
-    background: rgb(var(--neutral-400));
-    transition: all 0.2s ease;
-  }
-
-  .braille-dot-premium.active {
-    background: rgb(var(--warm-600));
+  .braille-dot-craft.active {
+    background: rgb(var(--craft-rust));
     box-shadow: 
       inset 0 1px 2px rgba(255,255,255,0.4),
-      0 1px 3px rgba(var(--warm-600), 0.3);
+      0 2px 6px rgba(var(--craft-rust), 0.4);
+    transform: scale(1.1);
   }
 
-  .story-card {
-    @apply relative overflow-hidden;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(var(--neutral-200), 0.4);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  .typewriter-container {
+    @apply relative overflow-hidden font-mono text-lg;
+    min-height: 120px;
+    background: rgba(var(--stone-800), 0.95);
+    color: rgb(var(--stone-100));
+    border-radius: 0.5rem;
+    padding: 1.5rem;
   }
 
-  .story-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 
-      0 10px 40px rgba(var(--neutral-800), 0.1),
-      0 4px 20px rgba(var(--warm-300), 0.2);
+  .typewriter-cursor {
+    @apply inline-block w-0.5 bg-current animate-pulse;
+    height: 1.2em;
   }
 
-  .map-marker {
-    @apply absolute w-4 h-4 rounded-full transform -translate-x-2 -translate-y-2 hover:scale-125 transition-all duration-300 z-10;
-    box-shadow: 0 2px 8px rgba(var(--neutral-800), 0.15);
+  .map-container {
+    @apply relative w-full h-96 rounded-lg overflow-hidden;
+    background: linear-gradient(135deg, 
+      rgba(var(--earth-200), 0.8) 0%, 
+      rgba(var(--stone-200), 0.9) 100%
+    );
   }
 
-  .map-marker.restaurant { background: rgb(var(--accent-emerald)); }
-  .map-marker.cafe { background: rgb(var(--accent-amber)); }
-  .map-marker.hotel { background: rgb(var(--accent-blue)); }
-  .map-marker.school { background: rgb(var(--accent-purple)); }
+  .map-marker-craft {
+    @apply absolute w-4 h-4 rounded-full transform -translate-x-2 -translate-y-2 hover:scale-125 transition-all duration-300 z-10 cursor-pointer;
+    box-shadow: 0 2px 8px rgba(var(--stone-800), 0.2);
+  }
+
+  .map-marker-craft.restaurant { background: rgb(var(--craft-olive)); }
+  .map-marker-craft.cafe { background: rgb(var(--craft-orange)); }
+  .map-marker-craft.hotel { background: rgb(var(--craft-sage)); }
+  .map-marker-craft.school { background: rgb(var(--craft-rust)); }
+
+  .order-step {
+    @apply relative p-6 rounded-lg;
+    background: rgba(var(--stone-50), 0.8);
+    border: 1px solid rgba(var(--stone-300), 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .order-step.active {
+    background: rgba(var(--earth-50), 0.9);
+    border-color: rgba(var(--craft-rust), 0.6);
+    box-shadow: 0 4px 12px rgba(var(--craft-rust), 0.15);
+  }
 }
 
 @layer utilities {
@@ -269,10 +275,38 @@
     text-wrap: balance;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, rgb(var(--accent-purple)), rgb(var(--accent-blue)));
+  .craft-gradient-text {
+    background: linear-gradient(135deg, rgb(var(--craft-rust)), rgb(var(--craft-orange)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 0.8s ease-out 0.3s both;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }

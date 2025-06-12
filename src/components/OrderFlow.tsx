@@ -11,87 +11,114 @@ const OrderFlow: React.FC = () => {
   const [step, setStep] = useState(1);
   const [orderData, setOrderData] = useState({
     restaurantName: '',
+    location: '',
     menuText: '',
     material: '',
     language: '',
     quantity: [50],
-    estimatedPrice: 0
+    contactEmail: '',
+    specialRequests: ''
   });
-
-  const calculatePrice = () => {
-    const basePrices = { paper: 2.5, aluminum: 4.2, plastic: 3.1 };
-    const materialPrice = basePrices[orderData.material as keyof typeof basePrices] || 0;
-    const total = materialPrice * orderData.quantity[0];
-    setOrderData(prev => ({ ...prev, estimatedPrice: total }));
-  };
 
   const steps = [
     { title: 'Restaurant Info', subtitle: 'Tell us about your space' },
-    { title: 'Menu Content', subtitle: 'Upload or paste your menu' },
-    { title: 'Material & Style', subtitle: 'Choose your preferred materials' },
-    { title: 'Review & Order', subtitle: 'Confirm your details' }
+    { title: 'Menu Details', subtitle: 'Share your menu content' },
+    { title: 'Customization', subtitle: 'Choose materials & specs' },
+    { title: 'Contact & Submit', subtitle: 'Complete your request' }
   ];
 
+  const handleInputChange = (field: string, value: any) => {
+    setOrderData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const isStepValid = (stepNum: number) => {
+    switch (stepNum) {
+      case 1:
+        return orderData.restaurantName && orderData.location;
+      case 2:
+        return orderData.menuText && orderData.language;
+      case 3:
+        return orderData.material && orderData.quantity[0] > 0;
+      case 4:
+        return orderData.contactEmail;
+      default:
+        return false;
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log('Order submitted:', orderData);
+    alert('Thank you! We\'ll contact you within 24 hours to begin your free braille menu creation.');
+  };
+
   return (
-    <section id="order-space" className="py-24 px-6 bg-white">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">Order for Your Space</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            A guided journey to create the perfect braille menus for your restaurant.
+    <section id="order-space" className="craft-section">
+      <div className="craft-content max-w-5xl mx-auto">
+        <div className="text-center mb-16 animate-slide-up">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-stone-800">
+            Start Your Journey
+          </h2>
+          <p className="text-xl text-stone-600 max-w-3xl mx-auto">
+            Transform your space into a beacon of accessibility. Completely free, forever.
           </p>
         </div>
 
-        {/* Progress Bar */}
+        {/* Progress Indicator */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-6">
             {steps.map((stepInfo, index) => (
-              <div key={index} className={`flex-1 text-center ${index < steps.length - 1 ? 'border-r border-border' : ''}`}>
+              <div key={index} className="flex-1 text-center">
                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-300 ${
-                  step > index + 1 ? 'bg-primary border-primary text-primary-foreground' :
-                  step === index + 1 ? 'border-primary text-primary' :
-                  'border-border text-muted-foreground'
+                  step > index + 1 ? 'bg-craft-rust border-craft-rust text-stone-50' :
+                  step === index + 1 ? 'border-craft-rust text-craft-rust bg-stone-50' :
+                  'border-stone-300 text-stone-400 bg-stone-100'
                 }`}>
                   {step > index + 1 ? '✓' : index + 1}
                 </div>
-                <div className="mt-2">
-                  <div className="text-sm font-medium">{stepInfo.title}</div>
-                  <div className="text-xs text-muted-foreground">{stepInfo.subtitle}</div>
+                <div className="mt-3">
+                  <div className="text-sm font-medium text-stone-800">{stepInfo.title}</div>
+                  <div className="text-xs text-stone-500">{stepInfo.subtitle}</div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="w-full bg-border h-2 rounded-full">
+          <div className="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
             <div 
-              className="bg-primary h-2 rounded-full transition-all duration-500"
+              className="bg-gradient-to-r from-craft-rust to-craft-orange h-full transition-all duration-500 ease-out"
               style={{ width: `${(step / steps.length) * 100}%` }}
-            ></div>
+            />
           </div>
         </div>
 
         {/* Step Content */}
-        <Card className="p-8 mb-8">
+        <div className={`order-step ${step === 1 ? 'active' : ''} mb-8`}>
           {step === 1 && (
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-6">Restaurant Information</h3>
+              <h3 className="text-2xl font-serif text-stone-800 mb-6">Restaurant Information</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Restaurant Name</label>
+                  <label className="text-sm font-medium mb-2 block text-stone-700">Restaurant Name *</label>
                   <Input 
-                    placeholder="Enter your restaurant name"
+                    placeholder="Your restaurant name"
                     value={orderData.restaurantName}
-                    onChange={(e) => setOrderData(prev => ({ ...prev, restaurantName: e.target.value }))}
+                    onChange={(e) => handleInputChange('restaurantName', e.target.value)}
+                    className="bg-stone-50 border-stone-300 focus:border-craft-rust"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Location</label>
-                  <Input placeholder="City, State" />
+                  <label className="text-sm font-medium mb-2 block text-stone-700">Location *</label>
+                  <Input 
+                    placeholder="City, State"
+                    value={orderData.location}
+                    onChange={(e) => handleInputChange('location', e.target.value)}
+                    className="bg-stone-50 border-stone-300 focus:border-craft-rust"
+                  />
                 </div>
               </div>
               <div>
-                <label className="text-sm font-medium mb-2 block">Type of Establishment</label>
-                <Select>
-                  <SelectTrigger>
+                <label className="text-sm font-medium mb-2 block text-stone-700">Type of Establishment</label>
+                <Select onValueChange={(value) => handleInputChange('establishmentType', value)}>
+                  <SelectTrigger className="bg-stone-50 border-stone-300 focus:border-craft-rust">
                     <SelectValue placeholder="Select restaurant type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -100,6 +127,7 @@ const OrderFlow: React.FC = () => {
                     <SelectItem value="fast-casual">Fast Casual</SelectItem>
                     <SelectItem value="cafe">Café</SelectItem>
                     <SelectItem value="bar">Bar/Pub</SelectItem>
+                    <SelectItem value="hotel">Hotel Restaurant</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -108,193 +136,174 @@ const OrderFlow: React.FC = () => {
 
           {step === 2 && (
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-6">Menu Content</h3>
+              <h3 className="text-2xl font-serif text-stone-800 mb-6">Menu Content</h3>
               <div>
-                <label className="text-sm font-medium mb-2 block">Menu Text</label>
+                <label className="text-sm font-medium mb-2 block text-stone-700">Menu Text *</label>
                 <Textarea 
-                  placeholder="Paste your menu content here or describe what you'd like us to help with..."
-                  className="min-h-40"
+                  placeholder="Paste your menu content here, or describe what sections you'd like us to help with..."
+                  className="min-h-40 bg-stone-50 border-stone-300 focus:border-craft-rust"
                   value={orderData.menuText}
-                  onChange={(e) => setOrderData(prev => ({ ...prev, menuText: e.target.value }))}
+                  onChange={(e) => handleInputChange('menuText', e.target.value)}
                 />
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Primary Language</label>
-                  <Select value={orderData.language} onValueChange={(value) => setOrderData(prev => ({ ...prev, language: value }))}>
-                    <SelectTrigger>
+                  <label className="text-sm font-medium mb-2 block text-stone-700">Primary Language *</label>
+                  <Select value={orderData.language} onValueChange={(value) => handleInputChange('language', value)}>
+                    <SelectTrigger className="bg-stone-50 border-stone-300 focus:border-craft-rust">
                       <SelectValue placeholder="Select language" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="english">English</SelectItem>
                       <SelectItem value="spanish">Spanish</SelectItem>
                       <SelectItem value="french">French</SelectItem>
+                      <SelectItem value="bilingual">English + Spanish</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Menu Sections</label>
-                  <Input placeholder="e.g., Appetizers, Mains, Desserts" />
+                  <label className="text-sm font-medium mb-2 block text-stone-700">Menu Sections</label>
+                  <Input 
+                    placeholder="e.g., Appetizers, Mains, Desserts"
+                    className="bg-stone-50 border-stone-300 focus:border-craft-rust"
+                  />
                 </div>
-              </div>
-              <div className="p-4 bg-accent rounded-lg">
-                <p className="text-sm">
-                  <strong>Tip:</strong> We can help optimize your menu layout for braille readability. 
-                  Our team will review and suggest improvements during the design process.
-                </p>
               </div>
             </div>
           )}
 
           {step === 3 && (
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-6">Material & Specifications</h3>
+              <h3 className="text-2xl font-serif text-stone-800 mb-6">Material Selection</h3>
               
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  { type: 'paper', name: 'Soft Paper', desc: 'Traditional, warm feel', price: '$2.50' },
-                  { type: 'aluminum', name: 'Aluminum Plate', desc: 'Durable, professional', price: '$4.20' },
-                  { type: 'plastic', name: 'Plastic Card', desc: 'Waterproof, flexible', price: '$3.10' }
+                  { type: 'paper', name: 'Premium Paper', desc: 'Traditional, warm feel', best: 'Most Popular' },
+                  { type: 'aluminum', name: 'Aluminum Plate', desc: 'Durable, professional', best: 'Long Lasting' },
+                  { type: 'plastic', name: 'Plastic Card', desc: 'Waterproof, flexible', best: 'Easy Clean' }
                 ].map((material) => (
-                  <Card 
+                  <div 
                     key={material.type}
-                    className={`p-6 cursor-pointer transition-all duration-200 ${
-                      orderData.material === material.type ? 'ring-2 ring-primary' : 'hover:shadow-lg'
+                    className={`craft-card p-6 cursor-pointer transition-all duration-300 ${
+                      orderData.material === material.type ? 'ring-2 ring-craft-rust bg-earth-50' : 'hover:shadow-lg'
                     }`}
-                    onClick={() => {
-                      setOrderData(prev => ({ ...prev, material: material.type }));
-                      calculatePrice();
-                    }}
+                    onClick={() => handleInputChange('material', material.type)}
                   >
-                    <div className={`w-full h-32 rounded-lg mb-4 ${
-                      material.type === 'paper' ? 'material-paper' :
-                      material.type === 'aluminum' ? 'material-aluminum' :
-                      'material-plastic'
-                    }`}></div>
-                    <h4 className="font-semibold mb-2">{material.name}</h4>
-                    <p className="text-sm text-muted-foreground mb-2">{material.desc}</p>
-                    <p className="font-bold text-primary">{material.price} per menu</p>
-                  </Card>
+                    <div className={`w-full h-24 rounded-lg mb-4 ${
+                      material.type === 'paper' ? 'bg-gradient-to-br from-stone-100 to-earth-100' :
+                      material.type === 'aluminum' ? 'bg-gradient-to-br from-stone-200 to-stone-300' :
+                      'bg-gradient-to-br from-stone-150 to-earth-200'
+                    }`} />
+                    <div className="text-xs craft-gradient-text font-medium mb-1">{material.best}</div>
+                    <h4 className="font-semibold text-stone-800 mb-2">{material.name}</h4>
+                    <p className="text-sm text-stone-600">{material.desc}</p>
+                  </div>
                 ))}
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-4 block">
+                <label className="text-sm font-medium mb-4 block text-stone-700">
                   Quantity: {orderData.quantity[0]} menus
                 </label>
                 <Slider
                   value={orderData.quantity}
-                  onValueChange={(value) => {
-                    setOrderData(prev => ({ ...prev, quantity: value }));
-                    calculatePrice();
-                  }}
-                  max={500}
+                  onValueChange={(value) => handleInputChange('quantity', value)}
+                  max={200}
                   min={10}
-                  step={10}
+                  step={5}
                   className="w-full"
                 />
-                <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <div className="flex justify-between text-xs text-stone-500 mt-2">
                   <span>10</span>
-                  <span>500</span>
+                  <span>200</span>
                 </div>
               </div>
-
-              {orderData.material && (
-                <div className="p-6 bg-primary/5 rounded-lg">
-                  <h4 className="font-semibold mb-2">Estimated Price</h4>
-                  <div className="text-3xl font-bold text-primary">
-                    ${orderData.estimatedPrice.toFixed(2)}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Includes design, production, and shipping
-                  </p>
-                </div>
-              )}
             </div>
           )}
 
           {step === 4 && (
             <div className="space-y-6">
-              <h3 className="text-2xl font-semibold mb-6">Review Your Order</h3>
+              <h3 className="text-2xl font-serif text-stone-800 mb-6">Contact Information</h3>
               
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <h4 className="font-semibold">Order Summary</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Restaurant:</span>
-                      <span>{orderData.restaurantName || 'Not specified'}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Material:</span>
-                      <span className="capitalize">{orderData.material || 'Not selected'}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Language:</span>
-                      <span className="capitalize">{orderData.language || 'Not selected'}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Quantity:</span>
-                      <span>{orderData.quantity[0]} menus</span>
-                    </div>
-                    <div className="border-t pt-2 flex justify-between font-bold">
-                      <span>Total:</span>
-                      <span>${orderData.estimatedPrice.toFixed(2)}</span>
-                    </div>
-                  </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="text-sm font-medium mb-2 block text-stone-700">Email Address *</label>
+                  <Input 
+                    type="email"
+                    placeholder="your@email.com"
+                    value={orderData.contactEmail}
+                    onChange={(e) => handleInputChange('contactEmail', e.target.value)}
+                    className="bg-stone-50 border-stone-300 focus:border-craft-rust"
+                  />
                 </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block text-stone-700">Phone (Optional)</label>
+                  <Input 
+                    placeholder="(555) 123-4567"
+                    className="bg-stone-50 border-stone-300 focus:border-craft-rust"
+                  />
+                </div>
+              </div>
 
-                <div className="space-y-4">
-                  <h4 className="font-semibold">What Happens Next?</h4>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
-                      <span>Our design team reviews your menu content</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
-                      <span>We create a detailed preview for your approval</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
-                      <span>Production begins (typically 3-5 business days)</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
-                      <span>Your braille menus are shipped to your location</span>
-                    </div>
+              <div>
+                <label className="text-sm font-medium mb-2 block text-stone-700">Special Requests</label>
+                <Textarea 
+                  placeholder="Any special design requests or accessibility needs..."
+                  value={orderData.specialRequests}
+                  onChange={(e) => handleInputChange('specialRequests', e.target.value)}
+                  className="bg-stone-50 border-stone-300 focus:border-craft-rust"
+                />
+              </div>
+
+              <div className="craft-card p-6 bg-earth-50 border-craft-rust/20">
+                <h4 className="font-semibold text-stone-800 mb-4">Order Summary</h4>
+                <div className="grid md:grid-cols-2 gap-6 text-sm">
+                  <div className="space-y-2">
+                    <div><strong>Restaurant:</strong> {orderData.restaurantName || 'Not specified'}</div>
+                    <div><strong>Location:</strong> {orderData.location || 'Not specified'}</div>
+                    <div><strong>Language:</strong> {orderData.language || 'Not selected'}</div>
+                  </div>
+                  <div className="space-y-2">
+                    <div><strong>Material:</strong> {orderData.material || 'Not selected'}</div>
+                    <div><strong>Quantity:</strong> {orderData.quantity[0]} menus</div>
+                    <div><strong>Cost:</strong> <span className="craft-gradient-text font-bold">FREE</span></div>
                   </div>
                 </div>
               </div>
             </div>
           )}
-        </Card>
+        </div>
 
-        {/* Navigation Buttons */}
+        {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button 
             variant="outline" 
             onClick={() => setStep(Math.max(1, step - 1))}
             disabled={step === 1}
-            className="tactile-button"
+            className="border-stone-400 hover:bg-stone-100"
           >
             Previous
           </Button>
           
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-stone-500">
             Step {step} of {steps.length}
           </div>
           
           {step < steps.length ? (
             <Button 
               onClick={() => setStep(Math.min(steps.length, step + 1))}
-              className="tactile-button"
+              disabled={!isStepValid(step)}
+              className="craft-button"
             >
               Continue
             </Button>
           ) : (
-            <Button className="tactile-button bg-primary">
-              Submit Order
+            <Button 
+              onClick={handleSubmit}
+              disabled={!isStepValid(step)}
+              className="craft-button"
+            >
+              Submit Request
             </Button>
           )}
         </div>

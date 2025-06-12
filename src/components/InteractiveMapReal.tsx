@@ -8,8 +8,6 @@ interface MapLocation {
   city: string;
   state: string;
   type: 'restaurant' | 'cafe' | 'hotel' | 'school';
-  material: 'paper' | 'aluminum' | 'plastic';
-  language: string;
   testimonial: string;
   coordinates: { lat: number; lng: number };
 }
@@ -25,9 +23,7 @@ const InteractiveMapReal: React.FC = () => {
       city: 'San Francisco',
       state: 'CA',
       type: 'restaurant',
-      material: 'aluminum',
-      language: 'English',
-      testimonial: 'Our customers love being able to read menus independently. It has transformed the dining experience.',
+      testimonial: 'Our customers love being able to read menus independently.',
       coordinates: { lat: 37.7749, lng: -122.4194 }
     },
     {
@@ -36,9 +32,7 @@ const InteractiveMapReal: React.FC = () => {
       city: 'Portland',
       state: 'OR',
       type: 'cafe',
-      material: 'paper',
-      language: 'English',
-      testimonial: 'The braille menus have made our cafe truly inclusive. We see the joy it brings every day.',
+      testimonial: 'The braille menus have made our cafe truly inclusive.',
       coordinates: { lat: 45.5152, lng: -122.6784 }
     },
     {
@@ -47,9 +41,7 @@ const InteractiveMapReal: React.FC = () => {
       city: 'Chicago',
       state: 'IL',
       type: 'hotel',
-      material: 'plastic',
-      language: 'English & Spanish',
-      testimonial: 'Having bilingual braille menus sets us apart as a truly accessible hospitality destination.',
+      testimonial: 'Having braille menus sets us apart as accessible.',
       coordinates: { lat: 41.8781, lng: -87.6298 }
     },
     {
@@ -58,9 +50,7 @@ const InteractiveMapReal: React.FC = () => {
       city: 'Miami',
       state: 'FL',
       type: 'restaurant',
-      material: 'aluminum',
-      language: 'English & Spanish',
-      testimonial: 'Our guests appreciate the thoughtfulness. It shows we care about every customer.',
+      testimonial: 'Our guests appreciate the thoughtfulness.',
       coordinates: { lat: 25.7617, lng: -80.1918 }
     },
     {
@@ -69,164 +59,159 @@ const InteractiveMapReal: React.FC = () => {
       city: 'Denver',
       state: 'CO',
       type: 'school',
-      material: 'paper',
-      language: 'English',
-      testimonial: 'Students can now navigate the cafeteria menu independently. It builds confidence.',
+      testimonial: 'Students can now navigate independently.',
       coordinates: { lat: 39.7392, lng: -104.9903 }
     }
   ];
 
   const filteredLocations = filter === 'all' ? locations : locations.filter(loc => loc.type === filter);
 
-  // Convert coordinates to SVG positions (simplified projection)
-  const coordsToSVG = (lat: number, lng: number) => {
-    const x = ((lng + 180) / 360) * 100;
-    const y = ((90 - lat) / 180) * 60;
-    return { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(60, y)) };
+  // Convert coordinates to map positions
+  const coordsToPosition = (lat: number, lng: number) => {
+    const x = ((lng + 130) / 70) * 100;
+    const y = ((50 - lat) / 25) * 100;
+    return { 
+      x: Math.max(5, Math.min(95, x)), 
+      y: Math.max(10, Math.min(90, y)) 
+    };
   };
 
   return (
-    <section id="see-movement" className="fintech-section">
-      <div className="premium-content max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-neutral-800">
-            Where Accessibility Lives
+    <section id="see-movement" className="craft-section">
+      <div className="craft-content max-w-7xl mx-auto">
+        <div className="text-center mb-16 animate-slide-up">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-stone-800">
+            Movement Across America
           </h2>
-          <p className="text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
-            Discover the growing network of businesses creating inclusive dining experiences. 
-            Each story represents independence and dignity—provided completely free.
+          <p className="text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
+            Every pin represents independence. Every story builds a more accessible world.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          {/* Real Map Section */}
+          {/* Map Section */}
           <div className="lg:col-span-2">
-            <div className="fintech-card p-8 min-h-[600px] overflow-hidden">
-              {/* USA Map SVG */}
-              <div className="relative h-full rounded-2xl overflow-hidden bg-gradient-to-br from-neutral-50 to-warm-50">
-                
-                {/* Simplified USA outline */}
+            <div className="craft-card p-8 min-h-[500px]">
+              <div className="map-container relative">
+                {/* USA Outline SVG */}
                 <svg viewBox="0 0 100 60" className="absolute inset-0 w-full h-full">
                   <defs>
-                    <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="rgb(var(--neutral-100))" />
-                      <stop offset="100%" stopColor="rgb(var(--warm-100))" />
+                    <linearGradient id="usaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgb(var(--stone-200))" />
+                      <stop offset="100%" stopColor="rgb(var(--earth-200))" />
                     </linearGradient>
                   </defs>
                   
-                  {/* USA shape (simplified) */}
+                  {/* Simplified USA outline */}
                   <path 
-                    d="M10,25 Q15,20 25,22 Q35,18 50,20 Q65,15 80,18 Q90,20 95,25 Q92,35 85,40 Q70,45 50,42 Q30,44 15,42 Q5,35 10,25 Z" 
-                    fill="url(#mapGradient)" 
-                    stroke="rgb(var(--neutral-200))"
-                    strokeWidth="0.2"
+                    d="M15,20 Q20,15 30,18 Q45,12 60,15 Q75,10 85,15 Q92,18 95,25 Q90,35 80,40 Q60,45 40,42 Q20,44 10,38 Q5,30 15,20 Z" 
+                    fill="url(#usaGradient)" 
+                    stroke="rgb(var(--stone-300))"
+                    strokeWidth="0.3"
+                    className="drop-shadow-sm"
                   />
                 </svg>
 
                 {/* Location Markers */}
                 {filteredLocations.map((location) => {
-                  const pos = coordsToSVG(location.coordinates.lat, location.coordinates.lng);
+                  const pos = coordsToPosition(location.coordinates.lat, location.coordinates.lng);
                   return (
                     <button
                       key={location.id}
-                      className={`map-marker ${location.type}`}
+                      className={`map-marker-craft ${location.type} ${
+                        selectedLocation?.id === location.id ? 'ring-2 ring-stone-600 scale-150' : ''
+                      }`}
                       style={{ 
                         left: `${pos.x}%`, 
                         top: `${pos.y}%` 
                       }}
                       onClick={() => setSelectedLocation(location)}
-                    >
-                      <span className="sr-only">{location.name}</span>
-                    </button>
+                    />
                   );
                 })}
 
-                {/* Filter Buttons */}
-                <div className="absolute top-6 left-6 flex flex-wrap gap-2">
-                  {['all', 'restaurant', 'cafe', 'hotel', 'school'].map((type) => (
+                {/* Filter Controls */}
+                <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                  {(['all', 'restaurant', 'cafe', 'hotel', 'school'] as const).map((type) => (
                     <button
                       key={type}
-                      onClick={() => setFilter(type as any)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      onClick={() => setFilter(type)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                         filter === type 
-                          ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg' 
-                          : 'bg-white/90 text-neutral-700 hover:bg-white hover:shadow-md border border-neutral-200'
+                          ? 'bg-craft-rust text-stone-50 shadow-md' 
+                          : 'bg-stone-100/90 text-stone-700 hover:bg-stone-200 border border-stone-300'
                       }`}
                     >
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                      {type === 'all' ? 'All' : type.charAt(0).toUpperCase() + type.slice(1)}
                     </button>
                   ))}
                 </div>
 
-                {/* Nominate Button */}
-                <button className="absolute bottom-6 right-6 premium-button">
-                  Nominate a Location
-                </button>
+                {/* Stats Display */}
+                <div className="absolute bottom-4 right-4 bg-stone-50/95 backdrop-blur-sm rounded-lg p-3 border border-stone-300">
+                  <div className="text-xs text-stone-600">Active Locations</div>
+                  <div className="text-xl font-bold craft-gradient-text">{filteredLocations.length}</div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Details Panel */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {selectedLocation ? (
-              <div className="fintech-card p-8">
-                <h3 className="text-2xl font-serif text-neutral-800 mb-2">
+              <div className="craft-card p-6 animate-slide-up">
+                <h3 className="text-xl font-serif text-stone-800 mb-2">
                   {selectedLocation.name}
                 </h3>
-                <p className="text-neutral-600 mb-6">
+                <p className="text-stone-600 mb-4">
                   {selectedLocation.city}, {selectedLocation.state}
                 </p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-sm">
+                <div className="mb-4">
+                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                    selectedLocation.type === 'restaurant' ? 'bg-craft-olive/20 text-craft-olive' :
+                    selectedLocation.type === 'cafe' ? 'bg-craft-orange/20 text-craft-orange' :
+                    selectedLocation.type === 'hotel' ? 'bg-craft-sage/20 text-craft-sage' :
+                    'bg-craft-rust/20 text-craft-rust'
+                  }`}>
                     {selectedLocation.type}
-                  </span>
-                  <span className="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-sm">
-                    {selectedLocation.material}
-                  </span>
-                  <span className="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-sm">
-                    {selectedLocation.language}
                   </span>
                 </div>
                 
-                <blockquote className="text-neutral-700 italic border-l-4 border-purple-500 pl-6 leading-relaxed mb-6">
+                <blockquote className="text-stone-700 italic border-l-4 border-craft-rust pl-4 mb-6">
                   "{selectedLocation.testimonial}"
                 </blockquote>
                 
-                <Button className="w-full">
-                  View Menu Preview
+                <Button className="craft-button w-full">
+                  View Their Story
                 </Button>
               </div>
             ) : (
-              <div className="fintech-card p-12 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl animate-gentle-bounce"></div>
+              <div className="craft-card p-8 text-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-stone-200 to-earth-200 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-6 h-6 bg-craft-rust rounded opacity-60"></div>
                 </div>
-                <p className="text-neutral-600 leading-relaxed">
-                  Click on any marker to learn about their accessibility journey and see their impact stories.
+                <p className="text-stone-600">
+                  Click any marker to see their accessibility story
                 </p>
               </div>
             )}
 
-            {/* Stats Card */}
-            <div className="fintech-card p-8">
-              <h4 className="text-xl font-serif text-neutral-800 mb-6">Movement Stats</h4>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-neutral-600">Active Locations</span>
-                  <span className="font-semibold gradient-text text-lg">{locations.length}</span>
+            {/* Movement Stats */}
+            <div className="craft-card p-6">
+              <h4 className="text-lg font-serif text-stone-800 mb-4">Impact Stats</h4>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-stone-600">Communities Served</span>
+                  <span className="font-semibold craft-gradient-text">247</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-neutral-600">Languages Supported</span>
-                  <span className="font-semibold gradient-text text-lg">12</span>
+                <div className="flex justify-between">
+                  <span className="text-stone-600">Menus Created</span>
+                  <span className="font-semibold craft-gradient-text">2,847</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-neutral-600">New This Month</span>
-                  <span className="font-semibold gradient-text text-lg">23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-neutral-600">Cost to Restaurants</span>
-                  <span className="font-semibold text-emerald-600 text-lg">$0</span>
+                <div className="flex justify-between">
+                  <span className="text-stone-600">Always Free</span>
+                  <span className="font-semibold text-craft-olive">100%</span>
                 </div>
               </div>
             </div>
