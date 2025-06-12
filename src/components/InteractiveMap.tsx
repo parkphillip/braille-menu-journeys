@@ -80,147 +80,157 @@ const InteractiveMap: React.FC = () => {
 
   const filteredLocations = filter === 'all' ? locations : locations.filter(loc => loc.type === filter);
 
-  const getMarkerColor = (type: string) => {
+  const getMarkerStyle = (type: string) => {
+    const baseStyle = "absolute w-5 h-5 rounded-full border-2 border-white transform -translate-x-2 -translate-y-2 hover:scale-125 transition-all duration-300 z-10 shadow-lg";
     switch (type) {
-      case 'restaurant': return 'bg-warm-600';
-      case 'cafe': return 'bg-warm-500';
-      case 'hotel': return 'bg-warm-700';
-      case 'school': return 'bg-warm-400';
-      default: return 'bg-primary';
+      case 'restaurant': return `${baseStyle} bg-warm-clay`;
+      case 'cafe': return `${baseStyle} bg-warm-earth`;
+      case 'hotel': return `${baseStyle} bg-warm-coffee`;
+      case 'school': return `${baseStyle} bg-warm-stone`;
+      default: return `${baseStyle} bg-warm-clay`;
     }
   };
 
   return (
-    <section id="map-section" className="py-24 px-6 bg-warm-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-foreground font-serif">
+    <section id="see-movement" className="organic-section">
+      <div className="floating-content max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl lg:text-6xl font-bold mb-8 text-warm-coffee font-serif">
             Where Accessibility Lives
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-2xl text-warm-coffee/80 max-w-4xl mx-auto leading-relaxed handwritten-style">
             Discover the growing network of businesses creating inclusive dining experiences. 
-            Each pin represents a story of independence and dignity.
+            Each story represents independence and dignity.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-12">
           {/* Map Section */}
           <div className="lg:col-span-2">
-            <div className="relative bg-gradient-to-br from-warm-100 to-warm-200 rounded-2xl p-8 min-h-[600px] overflow-hidden shadow-lg">
-              {/* Simplified US Map Background */}
-              <div className="absolute inset-4 bg-warm-200/50 rounded-xl border-2 border-warm-300">
-                <svg viewBox="0 0 100 60" className="w-full h-full opacity-20">
-                  <path d="M10,30 Q20,20 30,25 Q40,30 50,28 Q60,26 70,30 Q80,35 90,32" 
-                        stroke="currentColor" strokeWidth="0.5" fill="none" />
-                  <path d="M15,40 Q25,35 35,38 Q45,42 55,40 Q65,38 75,42 Q85,45 90,43" 
-                        stroke="currentColor" strokeWidth="0.5" fill="none" />
+            <div className="natural-card p-8 min-h-[600px] overflow-hidden">
+              {/* Organic Map Background */}
+              <div className="relative h-full rounded-2xl overflow-hidden" style={{
+                background: `linear-gradient(135deg, 
+                  rgb(var(--warm-cream)) 0%, 
+                  rgb(var(--warm-paper)) 30%,
+                  rgb(var(--warm-stone)) 70%,
+                  rgb(var(--warm-earth)) 100%)`
+              }}>
+                
+                {/* Abstract map shapes */}
+                <svg viewBox="0 0 100 60" className="absolute inset-0 w-full h-full opacity-20">
+                  <path 
+                    d="M10,25 Q25,15 40,20 Q55,25 70,22 Q85,20 95,25 Q90,35 75,38 Q60,42 45,40 Q30,38 15,42 Q5,35 10,25 Z" 
+                    fill="rgba(var(--warm-coffee), 0.1)" 
+                  />
+                  <path 
+                    d="M5,45 Q20,40 35,43 Q50,47 65,45 Q80,43 95,48 Q90,55 75,52 Q60,50 45,52 Q30,54 15,50 Q0,48 5,45 Z" 
+                    fill="rgba(var(--warm-clay), 0.1)" 
+                  />
                 </svg>
-              </div>
 
-              {/* Location Markers */}
-              {filteredLocations.map((location) => (
-                <button
-                  key={location.id}
-                  className={`absolute w-4 h-4 ${getMarkerColor(location.type)} rounded-full border-2 border-white shadow-lg transform -translate-x-2 -translate-y-2 hover:scale-125 transition-all duration-200 z-10`}
-                  style={{ 
-                    left: `${location.position.x}%`, 
-                    top: `${location.position.y}%` 
-                  }}
-                  onClick={() => setSelectedLocation(location)}
-                >
-                  <span className="sr-only">{location.name}</span>
-                </button>
-              ))}
-
-              {/* Filter Buttons */}
-              <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                {['all', 'restaurant', 'cafe', 'hotel', 'school'].map((type) => (
+                {/* Location Markers */}
+                {filteredLocations.map((location) => (
                   <button
-                    key={type}
-                    onClick={() => setFilter(type as any)}
-                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                      filter === type 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-white/80 text-foreground hover:bg-white'
-                    }`}
+                    key={location.id}
+                    className={getMarkerStyle(location.type)}
+                    style={{ 
+                      left: `${location.position.x}%`, 
+                      top: `${location.position.y}%` 
+                    }}
+                    onClick={() => setSelectedLocation(location)}
                   >
-                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                    <span className="sr-only">{location.name}</span>
                   </button>
                 ))}
-              </div>
 
-              {/* Nominate Button */}
-              <Button className="absolute bottom-4 right-4 bg-warm-600 hover:bg-warm-700 text-white rounded-lg">
-                Nominate a Location
-              </Button>
+                {/* Filter Buttons */}
+                <div className="absolute top-6 left-6 flex flex-wrap gap-3">
+                  {['all',
+
+ 'restaurant', 'cafe', 'hotel', 'school'].map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setFilter(type as any)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                        filter === type 
+                          ? 'bg-warm-clay text-warm-cream shadow-md' 
+                          : 'bg-white/80 text-warm-coffee hover:bg-white hover:shadow-sm'
+                      }`}
+                    >
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Nominate Button */}
+                <button className="absolute bottom-6 right-6 warm-button">
+                  Nominate a Location
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Details Panel */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             {selectedLocation ? (
-              <Card className="border-2 border-warm-200 shadow-lg">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-xl font-serif text-foreground">
-                    {selectedLocation.name}
-                  </CardTitle>
-                  <p className="text-muted-foreground">
-                    {selectedLocation.city}, {selectedLocation.state}
-                  </p>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="bg-warm-100 text-warm-800">
-                      {selectedLocation.type}
-                    </Badge>
-                    <Badge variant="outline" className="border-warm-300">
-                      {selectedLocation.material}
-                    </Badge>
-                    <Badge variant="outline" className="border-warm-300">
-                      {selectedLocation.language}
-                    </Badge>
-                  </div>
-                  <blockquote className="text-sm italic text-muted-foreground border-l-4 border-warm-300 pl-4 leading-relaxed">
-                    "{selectedLocation.testimonial}"
-                  </blockquote>
-                  <Button variant="outline" className="w-full border-warm-300 hover:bg-warm-50">
-                    View Menu Preview
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="natural-card p-8">
+                <h3 className="text-2xl font-serif text-warm-coffee mb-2">
+                  {selectedLocation.name}
+                </h3>
+                <p className="text-warm-coffee/70 mb-6">
+                  {selectedLocation.city}, {selectedLocation.state}
+                </p>
+                
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <span className="px-3 py-1 bg-warm-stone/30 text-warm-coffee rounded-full text-sm">
+                    {selectedLocation.type}
+                  </span>
+                  <span className="px-3 py-1 bg-warm-stone/30 text-warm-coffee rounded-full text-sm">
+                    {selectedLocation.material}
+                  </span>
+                  <span className="px-3 py-1 bg-warm-stone/30 text-warm-coffee rounded-full text-sm">
+                    {selectedLocation.language}
+                  </span>
+                </div>
+                
+                <blockquote className="text-warm-coffee/80 italic border-l-4 border-warm-clay pl-6 leading-relaxed mb-6">
+                  "{selectedLocation.testimonial}"
+                </blockquote>
+                
+                <button className="w-full px-6 py-3 border-2 border-warm-clay text-warm-coffee rounded-xl hover:bg-warm-stone/20 transition-all duration-300">
+                  View Menu Preview
+                </button>
+              </div>
             ) : (
-              <Card className="border-2 border-warm-200 shadow-lg">
-                <CardContent className="p-8 text-center">
-                  <div className="w-12 h-12 bg-warm-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <div className="w-6 h-6 bg-warm-500 rounded-full"></div>
-                  </div>
-                  <p className="text-muted-foreground">
-                    Click on any marker to learn about their accessibility journey and see their impact stories.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="natural-card p-12 text-center">
+                <div className="w-16 h-16 bg-warm-stone/30 rounded-full mx-auto mb-6 flex items-center justify-center">
+                  <div className="w-8 h-8 bg-warm-clay rounded-full animate-organic-pulse"></div>
+                </div>
+                <p className="text-warm-coffee/70 leading-relaxed">
+                  Click on any marker to learn about their accessibility journey and see their impact stories.
+                </p>
+              </div>
             )}
 
             {/* Stats Card */}
-            <Card className="border-2 border-warm-200 shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-lg font-serif">Movement Stats</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Active Locations</span>
-                  <span className="font-semibold text-primary">{locations.length}</span>
+            <div className="natural-card p-8">
+              <h4 className="text-xl font-serif text-warm-coffee mb-6">Movement Stats</h4>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-warm-coffee/70">Active Locations</span>
+                  <span className="font-semibold text-warm-clay text-lg">{locations.length}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Languages Supported</span>
-                  <span className="font-semibold text-primary">12</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-warm-coffee/70">Languages Supported</span>
+                  <span className="font-semibold text-warm-clay text-lg">12</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">New This Month</span>
-                  <span className="font-semibold text-primary">23</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-warm-coffee/70">New This Month</span>
+                  <span className="font-semibold text-warm-clay text-lg">23</span>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>

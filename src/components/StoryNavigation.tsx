@@ -46,29 +46,29 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ onSectionChange }) =>
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          <div className="text-3xl font-bold font-serif text-primary">Accessly</div>
+    <nav className="fixed top-0 left-0 right-0 z-50 organic-nav">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="flex items-center justify-between h-24">
+          <div className="text-4xl font-bold font-serif text-warm-coffee">Accessly</div>
           
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-2">
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`nav-story ${activeSection === section.id ? 'text-primary' : 'text-muted-foreground hover:text-foreground'} transition-colors`}
+                className={`nav-link ${activeSection === section.id ? 'text-warm-clay' : 'text-warm-coffee/70 hover:text-warm-coffee'}`}
               >
                 <div className="text-left">
-                  <div className="text-base font-semibold">{section.title}</div>
-                  <div className="text-sm opacity-75">{section.subtitle}</div>
+                  <div className="text-lg font-semibold">{section.title}</div>
+                  <div className="text-sm opacity-75 handwritten-style">{section.subtitle}</div>
                 </div>
               </button>
             ))}
           </div>
 
-          <Button className="tactile-button bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-lg shadow-md">
+          <button className="warm-button">
             Join the Movement
-          </Button>
+          </button>
         </div>
       </div>
     </nav>
