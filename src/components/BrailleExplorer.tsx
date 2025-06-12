@@ -1,10 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import BrailleCell from './BrailleCell';
+import { Button } from '@/components/ui/button';
 
 // Basic English Braille mapping
 const brailleMap: Record<string, number[]> = {
@@ -15,6 +13,41 @@ const brailleMap: Record<string, number[]> = {
   'u': [1, 3, 6], 'v': [1, 2, 3, 6], 'w': [2, 4, 5, 6], 'x': [1, 3, 4, 6], 'y': [1, 3, 4, 5, 6],
   'z': [1, 3, 5, 6], ' ': [], ',': [2], '.': [2, 5, 6], '?': [2, 6], '!': [2, 3, 5],
   ':': [2, 5], ';': [2, 3], '-': [3, 6], "'": [3], '"': [2, 3, 6], '(': [2, 3, 6], ')': [3, 5, 6]
+};
+
+interface BrailleCellProps {
+  pattern: number[];
+  isHighlighted?: boolean;
+  onClick?: () => void;
+}
+
+const BrailleCell: React.FC<BrailleCellProps> = ({ pattern, isHighlighted = false, onClick }) => {
+  const dotPositions = [
+    { top: '0%', left: '0%' },      // dot 1
+    { top: '33%', left: '0%' },     // dot 2
+    { top: '66%', left: '0%' },     // dot 3
+    { top: '0%', left: '60%' },     // dot 4
+    { top: '33%', left: '60%' },    // dot 5
+    { top: '66%', left: '60%' },    // dot 6
+  ];
+
+  return (
+    <div 
+      className={`braille-cell-premium ${isHighlighted ? 'ring-2 ring-purple-500' : ''} cursor-pointer rounded-sm`}
+      onClick={onClick}
+    >
+      {dotPositions.map((pos, index) => (
+        <div
+          key={index}
+          className={`braille-dot-premium ${pattern.includes(index + 1) ? 'active' : ''}`}
+          style={{
+            top: pos.top,
+            left: pos.left,
+          }}
+        />
+      ))}
+    </div>
+  );
 };
 
 interface BrailleExplorerProps {
@@ -59,11 +92,11 @@ const BrailleExplorer: React.FC<BrailleExplorerProps> = ({ className }) => {
   };
 
   return (
-    <section className={`py-24 px-6 ${className}`}>
-      <div className="max-w-7xl mx-auto">
+    <section className={`fintech-section ${className}`} id="experience-menu">
+      <div className="premium-content max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">Experience a Menu</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
             Transform your menu text into beautiful, accurate braille. See how your words become tactile experiences.
           </p>
         </div>
@@ -71,20 +104,20 @@ const BrailleExplorer: React.FC<BrailleExplorerProps> = ({ className }) => {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Input Section */}
           <div className="space-y-6">
-            <Card className="p-8">
-              <h3 className="text-2xl font-semibold mb-6">Menu Text</h3>
+            <div className="fintech-card p-8">
+              <h3 className="text-2xl font-semibold mb-6 text-neutral-800">Menu Text</h3>
               <Textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="Enter your menu text here..."
-                className="min-h-32 text-lg"
+                className="min-h-32 text-lg border-neutral-200 focus:border-purple-500 focus:ring-purple-500"
               />
               
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Language</label>
+                  <label className="text-sm font-medium mb-2 block text-neutral-700">Language</label>
                   <Select value={language} onValueChange={setLanguage}>
-                    <SelectTrigger>
+                    <SelectTrigger className="border-neutral-200 focus:border-purple-500">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -96,9 +129,9 @@ const BrailleExplorer: React.FC<BrailleExplorerProps> = ({ className }) => {
                 </div>
                 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Material</label>
+                  <label className="text-sm font-medium mb-2 block text-neutral-700">Material</label>
                   <Select value={material} onValueChange={(value: 'paper' | 'aluminum' | 'plastic') => setMaterial(value)}>
-                    <SelectTrigger>
+                    <SelectTrigger className="border-neutral-200 focus:border-purple-500">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -109,29 +142,25 @@ const BrailleExplorer: React.FC<BrailleExplorerProps> = ({ className }) => {
                   </Select>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-8">
-              <h3 className="text-2xl font-semibold mb-4">Physical Preview</h3>
-              <div className="menu-preview bg-gradient-to-br from-slate-50 to-slate-100 min-h-64 flex items-center justify-center">
+            <div className="fintech-card p-8">
+              <h3 className="text-2xl font-semibold mb-4 text-neutral-800">Physical Preview</h3>
+              <div className="bg-gradient-to-br from-neutral-50 to-warm-50 min-h-64 rounded-xl flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-slate-200 rounded-lg mb-4 mx-auto"></div>
-                  <p className="text-sm text-muted-foreground">3D menu preview will appear here</p>
+                  <div className="w-16 h-16 bg-gradient-to-br from-neutral-200 to-warm-200 rounded-2xl mb-4 mx-auto"></div>
+                  <p className="text-sm text-neutral-500">3D menu preview will appear here</p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
 
           {/* Braille Output */}
           <div className="space-y-6">
-            <Card className="p-8">
-              <h3 className="text-2xl font-semibold mb-6">Braille Output</h3>
+            <div className="fintech-card p-8">
+              <h3 className="text-2xl font-semibold mb-6 text-neutral-800">Braille Output</h3>
               <div 
-                className={`p-6 rounded-lg border-2 border-dashed border-border ${
-                  material === 'paper' ? 'material-paper' : 
-                  material === 'aluminum' ? 'material-aluminum' : 
-                  'material-plastic'
-                }`}
+                className="p-6 rounded-xl border-2 border-dashed border-neutral-200 bg-gradient-to-br from-white to-neutral-50"
                 style={{ minHeight: '200px' }}
               >
                 <div className="flex flex-wrap leading-10">
@@ -141,28 +170,27 @@ const BrailleExplorer: React.FC<BrailleExplorerProps> = ({ className }) => {
                       pattern={item.pattern}
                       isHighlighted={highlightedWord === item.wordIndex}
                       onClick={() => handleCellClick(item.wordIndex)}
-                      material={material}
                     />
                   ))}
                 </div>
               </div>
               
               {highlightedWord !== null && (
-                <div className="mt-4 p-4 bg-accent rounded-lg">
-                  <p className="text-sm font-medium">
-                    Highlighted word: <span className="font-bold">
+                <div className="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                  <p className="text-sm font-medium text-neutral-700">
+                    Highlighted word: <span className="font-bold gradient-text">
                       {inputText.split(' ')[highlightedWord]}
                     </span>
                   </p>
                 </div>
               )}
-            </Card>
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <Button className="tactile-button py-6 text-lg">
-                Get Quote
+              <Button className="premium-button py-6 text-lg">
+                Get Free Quote
               </Button>
-              <Button variant="outline" className="tactile-button py-6 text-lg">
+              <Button variant="outline" className="py-6 text-lg border-neutral-300 hover:bg-neutral-50">
                 Download Preview
               </Button>
             </div>

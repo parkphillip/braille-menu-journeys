@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 const ImpactStories: React.FC = () => {
@@ -9,155 +8,128 @@ const ImpactStories: React.FC = () => {
       name: "Maria Rodriguez",
       location: "Casa Bella, Austin TX",
       quote: "For the first time in 15 years, I could order dinner without asking for help. The braille menu made me feel truly welcome.",
-      image: "/placeholder.svg",
-      type: "video"
+      type: "Diner",
+      category: "Independence"
     },
     {
       name: "Chef David Chen",
       location: "Golden Dragon, San Francisco",
       quote: "Seeing our customers' faces light up when they receive our braille menus... that's why we cook.",
-      image: "/placeholder.svg",
-      type: "letter"
+      type: "Restaurant Owner",
+      category: "Joy"
     },
     {
       name: "Sarah Thompson",
       location: "Family Diner, Portland",
       quote: "My daughter can now read the kids menu herself. These small moments change everything.",
-      image: "/placeholder.svg",
-      type: "testimonial"
+      type: "Parent",
+      category: "Family"
+    },
+    {
+      name: "James Wilson",
+      location: "Sunset Café, Seattle",
+      quote: "The free service from Accessly means we could provide this without any financial burden. It's incredible.",
+      type: "Business Owner",
+      category: "Accessibility"
+    },
+    {
+      name: "Lisa Martinez",
+      location: "Downtown Bistro, Chicago",
+      quote: "I never realized how much I was missing until I had a braille menu. Now dining out is pure pleasure.",
+      type: "Diner",
+      category: "Discovery"
+    },
+    {
+      name: "Michael Park",
+      location: "University Dining, Boston",
+      quote: "Our students finally have equal access to all our dining options. It's transformed campus life.",
+      type: "Institution",
+      category: "Equality"
     }
   ];
 
-  const menuExamples = [
-    {
-      restaurant: "Bistro Luna",
-      city: "Chicago",
-      material: "Aluminum",
-      image: "/placeholder.svg"
-    },
-    {
-      restaurant: "Ocean View",
-      city: "Seattle",
-      material: "Soft Paper",
-      image: "/placeholder.svg"
-    },
-    {
-      restaurant: "Garden Café",
-      city: "Portland",
-      material: "Plastic Card",
-      image: "/placeholder.svg"
-    },
-    {
-      restaurant: "Metro Grill",
-      city: "New York",
-      material: "Aluminum",
-      image: "/placeholder.svg"
-    }
-  ];
+  const categories = ["All", "Independence", "Joy", "Family", "Accessibility", "Discovery", "Equality"];
 
   return (
-    <section id="see-movement" className="py-24 px-6 bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="fintech-section">
+      <div className="premium-content max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">See the Movement</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Real stories from real people whose lives have been touched by accessible dining.
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6">Stories That Touch Hearts</h2>
+          <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
+            Real stories from real people whose lives have been touched by accessible dining—all made possible through our free service.
           </p>
         </div>
 
-        {/* Stories Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-20">
-          {stories.map((story, index) => (
-            <Card key={index} className="impact-card p-8 group cursor-pointer">
-              <div className="relative mb-6">
-                <div className="w-full h-48 bg-slate-200 rounded-lg overflow-hidden">
-                  <img 
-                    src={story.image} 
-                    alt={`${story.name} story`}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium">
-                  {story.type}
-                </div>
-              </div>
-              
-              <blockquote className="text-lg italic mb-4 text-muted-foreground">
-                "{story.quote}"
-              </blockquote>
-              
-              <div>
-                <div className="font-semibold">{story.name}</div>
-                <div className="text-sm text-muted-foreground">{story.location}</div>
-              </div>
-            </Card>
+        {/* Category Filters */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {categories.map((category) => (
+            <button
+              key={category}
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/90 text-neutral-700 hover:bg-white hover:shadow-md border border-neutral-200"
+            >
+              {category}
+            </button>
           ))}
         </div>
 
-        {/* Wall of Menus */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center mb-12">Wall of Menus</h3>
-          <div className="relative">
-            <div className="flex gap-6 overflow-x-auto pb-4">
-              {menuExamples.map((menu, index) => (
-                <div key={index} className="flex-shrink-0 w-80">
-                  <Card className="impact-card overflow-hidden group cursor-pointer">
-                    <div className="h-64 bg-gradient-to-br from-slate-100 to-slate-200 relative overflow-hidden">
-                      <img 
-                        src={menu.image} 
-                        alt={`${menu.restaurant} braille menu`}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="p-6">
-                      <h4 className="font-semibold mb-1">{menu.restaurant}</h4>
-                      <p className="text-sm text-muted-foreground mb-2">{menu.city}</p>
-                      <div className="inline-block bg-accent text-accent-foreground text-xs px-2 py-1 rounded">
-                        {menu.material}
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              ))}
+        {/* Stories Grid */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          {stories.map((story, index) => (
+            <div key={index} className="story-card group">
+              <div className="flex items-start justify-between mb-4">
+                <span className="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-neutral-700 rounded-full text-sm font-medium">
+                  {story.type}
+                </span>
+                <span className="text-xs text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
+                  {story.category}
+                </span>
+              </div>
+              
+              <blockquote className="text-lg italic mb-6 text-neutral-700 leading-relaxed">
+                "{story.quote}"
+              </blockquote>
+              
+              <div className="border-t border-neutral-200 pt-4">
+                <div className="font-semibold text-neutral-800">{story.name}</div>
+                <div className="text-sm text-neutral-500">{story.location}</div>
+              </div>
             </div>
-            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-          </div>
+          ))}
         </div>
 
         {/* Timeline */}
-        <div className="relative">
-          <h3 className="text-3xl font-bold text-center mb-12">Our Journey</h3>
+        <div className="mb-16">
+          <h3 className="text-3xl font-bold text-center mb-12 text-neutral-800">Our Free Service Journey</h3>
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              <div className="absolute left-1/2 transform -translate-x-0.5 w-px h-full bg-border"></div>
+              <div className="absolute left-1/2 transform -translate-x-0.5 w-px h-full bg-gradient-to-b from-purple-500 to-blue-500"></div>
               
               {[
-                { year: '2019', title: 'First Braille Menu', description: 'Launched with local café in Portland' },
-                { year: '2020', title: '100 Restaurants', description: 'Reached our first major milestone' },
-                { year: '2021', title: 'National Expansion', description: 'Available in all 50 states' },
-                { year: '2022', title: 'International Growth', description: 'Expanded to Canada and UK' },
-                { year: '2023', title: 'Material Innovation', description: 'Introduced aluminum and plastic options' },
-                { year: '2024', title: 'Digital Integration', description: 'QR codes linking to braille versions' }
+                { year: '2019', title: 'First Free Menu', description: 'Launched with local café in Portland—completely free' },
+                { year: '2020', title: '100 Free Restaurants', description: 'Reached our first major milestone at no cost' },
+                { year: '2021', title: 'National Free Program', description: 'Available in all 50 states, always free' },
+                { year: '2022', title: 'International Free Expansion', description: 'Expanded to Canada and UK without charge' },
+                { year: '2023', title: 'Free Material Innovation', description: 'Introduced aluminum and plastic options for free' },
+                { year: '2024', title: 'Free Digital Integration', description: 'QR codes linking to braille versions at no cost' }
               ].map((milestone, index) => (
                 <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'justify-start' : 'justify-end'} mb-12`}>
                   <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
-                    <Card className="impact-card p-6">
-                      <div className="text-2xl font-bold text-primary mb-2">{milestone.year}</div>
-                      <h4 className="font-semibold mb-2">{milestone.title}</h4>
-                      <p className="text-sm text-muted-foreground">{milestone.description}</p>
-                    </Card>
+                    <div className="fintech-card p-6">
+                      <div className="text-2xl font-bold gradient-text mb-2">{milestone.year}</div>
+                      <h4 className="font-semibold mb-2 text-neutral-800">{milestone.title}</h4>
+                      <p className="text-sm text-neutral-600">{milestone.description}</p>
+                    </div>
                   </div>
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg"></div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full border-4 border-white shadow-lg"></div>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="text-center mt-16">
-          <Button size="lg" className="tactile-button text-lg px-12 py-6">
-            Add Your Story
+        <div className="text-center">
+          <Button className="premium-button text-lg px-12 py-6">
+            Share Your Story
           </Button>
         </div>
       </div>

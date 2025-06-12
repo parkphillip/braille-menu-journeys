@@ -9,15 +9,15 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ onSectionChange }) =>
   const [activeSection, setActiveSection] = useState('what-braille-changes');
 
   const sections = [
-    { id: 'what-braille-changes', title: 'What Braille Changes', subtitle: 'The hidden impact' },
-    { id: 'experience-menu', title: 'Experience a Menu', subtitle: 'Try it yourself' },
-    { id: 'see-movement', title: 'See the Movement', subtitle: 'Real stories' },
-    { id: 'order-space', title: 'Order for Your Space', subtitle: 'Get started' },
+    { id: 'what-braille-changes', title: 'Impact' },
+    { id: 'experience-menu', title: 'Experience' },
+    { id: 'see-movement', title: 'Movement' },
+    { id: 'order-space', title: 'Get Started' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 80;
       
       sections.forEach((section) => {
         const element = document.getElementById(section.id);
@@ -45,28 +45,25 @@ const StoryNavigation: React.FC<StoryNavigationProps> = ({ onSectionChange }) =>
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 organic-nav">
+    <nav className="fixed top-0 left-0 right-0 z-50 premium-nav">
       <div className="max-w-7xl mx-auto px-8">
-        <div className="flex items-center justify-between h-24">
-          <div className="text-4xl font-bold font-serif text-warm-coffee">Accessly</div>
+        <div className="flex items-center justify-between h-[60px]">
+          <div className="text-2xl font-bold font-serif text-neutral-800">Accessly</div>
           
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-8">
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`nav-link ${activeSection === section.id ? 'text-warm-clay' : 'text-warm-coffee/70 hover:text-warm-coffee'}`}
+                className={`nav-link-premium ${activeSection === section.id ? 'active' : ''}`}
               >
-                <div className="text-left">
-                  <div className="text-lg font-semibold">{section.title}</div>
-                  <div className="text-sm opacity-75 handwritten-style">{section.subtitle}</div>
-                </div>
+                {section.title}
               </button>
             ))}
           </div>
 
-          <button className="warm-button">
-            Join the Movement
+          <button className="premium-button">
+            Join Free
           </button>
         </div>
       </div>
